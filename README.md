@@ -207,5 +207,18 @@ plotDistToTSS(wt_anno, title = "WT-FSEQ2, scale=0.001")
 plotDistToTSS(mt_anno, title = "MT-FSEQ2, scale = 0.001")
 plotDistToTSS(wt_anno_macs, title = "WT-MACS")
 plotDistToTSS(mt_anno_macs, title = "MT-MACS")
+
+wt_peak <- readPeakFile("Sample_3067-MR-1/fseq_output/Sample_3067-MR-1_fseq_bw_peaks.narrowPeak")
+mt_peak <- readPeakFile("Sample_3067-MR-3/fseq_output/Sample_3067-MR-3_fseq2_bw_peaks.narrowPeak")
+wt_peak_macs <- readPeakFile("mr1MACS2_output/mr1_macs_peaks.narrowPeak")
+mt_peak_macs <- readPeakFile("mr3MACS2_output/mr3_macs_peaks.narrowPeak")
+
+promoter <- getPromoters(TxDb=txdb, upstream=3000, downstream=3000)
+wt_tagMatrix <- getTagMatrix(wt_peak, windows=promoter)
+mt_tagmatrix <- getTagMatrix(mt_peak, windows = promoter)
+
+tagHeatmap(wt_tagMatrix, xlim=c(-3000, 3000), color="red", title = "Heatmap of WT-Mnase peaks around TSS regions")
+tagHeatmap(mt_tagmatrix, xlim=c(-3000, 3000), color="red", title = "Heatmap of MT-Mnase peaks around TSS regions")
+
 ```
 
