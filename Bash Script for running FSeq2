@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#SBATCH --job-name=fseq2_1bed
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem-per-cpu=32GB 
+#SBATCH --time=12:00:00
+#SBATCH --account=junzli1
+#SBATCH --partition=standard
+
+# The application(s) to execute along with its input arguments and options
+module load Bioinformatics
+module load python3.6-anaconda
+module load bedtools2/2.29.2
+
+#conda create --name fseq2_env python=3.6
+source activate fseq2_env
+conda activate fseq2_env
+
+
+
+fseq2 callpeak Sample_3067-MR-1/bamfiles/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sorted_name.bed -control_file chip_input/cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16.sorted_name.bed -l 1000 -t 4.0 -p_thr 0.05 -sig_format np_array -chrom_size_file mm10.chrom.sizes -v -cpus 4 -o Sample_3067-MR-1/fseq_output -name Sample_3067-MR-1_fseq -pe
