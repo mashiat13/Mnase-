@@ -14,37 +14,49 @@ module load Bioinformatics
 module load bowtie2/2.4.1
 
 #this is working for us 
-bowtie2 -x mm10/mm10 -1 Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_R1_001.fastq.gz -2 Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_R2_001.fastq.gz -S Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sam -p 4
+bowtie2 -x mm10/mm10 -1 Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_R1_001.fastq.gz \
+-2 Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_R2_001.fastq.gz \
+-S Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sam -p 4
 
 ```
 Command for ecoli genome as reference 
+
 ```
+
 # The application(s) to execute along with its input arguments and options
 module load Bioinformatics
 module load bowtie2/2.4.1
 
 #this is working for us 
-bowtie2 -x ecoli/e_coli -1 Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_R1_001.fastq.gz -2 Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_R2_001.fastq.gz -S Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_ECOLI.sam
+bowtie2 -x ecoli/e_coli -1 Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_R1_001.fastq.gz \
+-2 Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_R2_001.fastq.gz \
+-S Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_ECOLI.sam
 ```
 Then I moved on to running the alignment through Fseq2 pipeline. I was having format recognition problems with my Bam files from the alignment. So I converted them to bed files using bedtools 'bamtobed' and then ran the Fseq2 pipeline. For the control input DNA, I am using a ChIP seq sequence from WT sperm input DNA. 
 
 BEDtools command to covert bam to bed files. 
 
 ```
+
 # The application(s) to execute along with its input arguments and options
 module load Bioinformatics
 module load python3.6-anaconda
 module load bedtools2/2.29.2
 
-bedtools bamtobed -i Sample_3067-MR-1/bamfiles/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sorted_name.bam -bedpe > Sample_3067-MR-1/bamfiles/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sorted_name.bed 
+bedtools bamtobed -i Sample_3067-MR-1/bamfiles/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sorted_name.bam \
+-bedpe > Sample_3067-MR-1/bamfiles/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sorted_name.bed 
 
-bedtools bamtobed -i Sample_3067-MR-3/bamfiles/cutadapt_3067-MR-3_GTCCGCAT-AGATCTCG_S107.sorted_name.bam -bedpe > Sample_3067-MR-3/bamfiles/cutadapt_3067-MR-3_GTCCGCAT-AGATCTCG_S107.sorted_name.bed
+bedtools bamtobed -i Sample_3067-MR-3/bamfiles/cutadapt_3067-MR-3_GTCCGCAT-AGATCTCG_S107.sorted_name.bam \
+-bedpe > Sample_3067-MR-3/bamfiles/cutadapt_3067-MR-3_GTCCGCAT-AGATCTCG_S107.sorted_name.bed
 
-bedtools bamtobed -i chip_input/cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16.sorted_name.bam -bedpe > chip_input/cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16.sorted_name.bed
+bedtools bamtobed -i chip_input/cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16.sorted_name.bam \
+-bedpe > chip_input/cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16.sorted_name.bed
+
 ```
 Fseq2 command: I used the same command to output files in both np_array and bigwig format. 
 
 ```
+
 # The application(s) to execute along with its input arguments and options
 module load Bioinformatics
 module load python3.6-anaconda
@@ -54,12 +66,16 @@ module load bedtools2/2.29.2
 source activate fseq2_env
 conda activate fseq2_env
 
-fseq2 callpeak Sample_3067-MR-1/bamfiles/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sorted_name.bed -control_file chip_input/cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16.sorted_name.bed -l 1000 -t 4.0 -p_thr 0.05 -sig_format np_array -chrom_size_file mm10.chrom.sizes -v -cpus 4 -o Sample_3067-MR-1/fseq_output -name Sample_3067-MR-1_fseq -pe
+fseq2 callpeak Sample_3067-MR-1/bamfiles/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sorted_name.bed \
+-control_file chip_input/cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16.sorted_name.bed -l 1000 \
+-t 4.0 -p_thr 0.05 -sig_format np_array -chrom_size_file mm10.chrom.sizes \
+-v -cpus 4 -o Sample_3067-MR-1/fseq_output -name Sample_3067-MR-1_fseq -pe
 
 ```
 I used a python script to normalise the np_array .h5 signal file. So far the scaling ratios I have used are 0.001, 0.004 and 0.009. (I think this definitely has to be changed). The python script is as follows:
 
 ```
+
 import numpy as np
 import h5py
 import pyBigWig
@@ -107,6 +123,7 @@ with h5py.File('Sample_3067-MR-1_fseq_sig.h5', mode='r') as sig_file: #change na
         output_bw.addHeader([(chrom, chr_size_dic[chrom]) for chrom in chrom_ls])
         for chrom in chrom_ls:
             output_bw.addEntries(chrom, int(sig_file.attrs[chrom]), values=sig_dict[chrom], span=1, step=1)
+            
 ```
 
 I looked at the generation of the raw and the scaled bigwig files using deeptools:
@@ -116,7 +133,9 @@ I looked at the generation of the raw and the scaled bigwig files using deeptool
 Correlation between samples were increased from ~60% to ~80% after scaling. 
 
 The script I used to generate the plots is as follows:
+
 ```
+
 # The application(s) to execute along with its input arguments and options
 module load Bioinformatics
 module load python/3.7.4
@@ -128,6 +147,7 @@ module load python/3.7.4
 /home/mrabbani/.local/bin/plotCorrelation --corData mnase_wt_mt_multibw_001.npz --corMethod pearson --whatToPlot heatmap -o mnase_wt_mt_multibw_corr_pearson_heatmap_001.pdf
 
 /home/mrabbani/.local/bin/plotPCA -in mnase_wt_mt_multibw_001.npz -o mnase_wt_mt_multibw_PCA_readCounts_001.png -T "PCA of Mnase of WT vs Mutant"
+
 ```
 
 I also looked at the heatmap of the reads around the Transcription start sites, using deeptools. For this I used the coding exon track from UCSC.
@@ -136,6 +156,7 @@ I also looked at the heatmap of the reads around the Transcription start sites, 
 Script used to generate plots are as follows:
 
 ```
+
 # The application(s) to execute along with its input arguments and options
 module load Bioinformatics
 module load python/3.7.4
@@ -158,6 +179,7 @@ I used the ChipSeeker package on R to look at distribution of peaks across diffe
 ![image](https://user-images.githubusercontent.com/54853508/114587683-e4d03100-9c53-11eb-962c-7fbfc1685bc1.png)
 
 ```
+
 #Load in all required libraries 
 library(ggplot2)
 library(stringr)
