@@ -113,4 +113,46 @@ I looked at the generation of the raw and the scaled bigwig files using deeptool
 
 ![image](https://user-images.githubusercontent.com/54853508/114576750-6c647280-9c49-11eb-86d7-c102a17c4571.png)
 
+Correlation between samples were increased from ~60% to ~80% after scaling. 
+
+The script I used to generate the plots is as follows:
+```
+# The application(s) to execute along with its input arguments and options
+module load Bioinformatics
+module load python/3.7.4
+
+#generate big wig files using deeptools
+
+/home/mrabbani/.local/bin/multiBigwigSummary bins -b Sample_3067-MR-1/fseq_output/scaled_all_chromosomes_MR1_001.bw Sample_3067-MR-3/fseq_output/scaled_all_chromosomes_MR3_001.bw -o mnase_wt_mt_multibw_001.npz
+
+/home/mrabbani/.local/bin/plotCorrelation --corData mnase_wt_mt_multibw_001.npz --corMethod pearson --whatToPlot heatmap -o mnase_wt_mt_multibw_corr_pearson_heatmap_001.pdf
+
+/home/mrabbani/.local/bin/plotPCA -in mnase_wt_mt_multibw_001.npz -o mnase_wt_mt_multibw_PCA_readCounts_001.png -T "PCA of Mnase of WT vs Mutant"
+```
+
+I also looked at the heatmap of the reads around the Transcription start sites, using deeptools. For this I used the coding exon track from UCSC.
+MR1_scaled_001_codingExon_TSS_Heatmap.png![image](https://user-images.githubusercontent.com/54853508/114583148-4b068500-9c4f-11eb-8561-1b98d1d17312.png)
+MR3_scaled_001_codingExon_TSS_Heatmap.png![image](https://user-images.githubusercontent.com/54853508/114583163-4fcb3900-9c4f-11eb-86e6-baf65839502b.png)
+
+Script used to generate plots are as follows:
+
+```
+# The application(s) to execute along with its input arguments and options
+module load Bioinformatics
+module load python/3.7.4
+
+/home/mrabbani/.local/bin/computeMatrix reference-point --referencePoint TSS -b 10000 -a 10000 -R bed_ucsc/mm10_ucsc_coding_exons.bed -S Sample_3067-MR-1/fseq_output/scaled_all_chromosomes_MR1_001.bw --skipZeros -o deeptools_output/MR1_scaled_001_codingExon_TSS.gz --outFileSortedRegions regions_MR1_scaled_001_codingExon_TSS.bed -p 8
+
+/home/mrabbani/.local/bin/computeMatrix reference-point --referencePoint TSS -b 10000 -a 10000 -R bed_ucsc/mm10_ucsc_coding_exons.bed -S Sample_3067-MR-3/fseq_output/scaled_all_chromosomes_MR3_001.bw --skipZeros -o deeptools_output/MR3_scaled_001_codingExon_TSS.gz --outFileSortedRegions regions_MR3_scaled_001_codingExon_TSS.bed -p 8
+
+/home/mrabbani/.local/bin/plotHeatmap -m MR1_scaled_001_codingExon_TSS.gz -out MR1_scaled_001_codingExon_TSS_Heatmap.png 
+
+/home/mrabbani/.local/bin/plotHeatmap -m MR3_scaled_001_codingExon_TSS.gz -out MR3_scaled_001_codingExon_TSS_Heatmap.png 
+
+```
+In addtion to using Fseq2, I also used MACS2 to call peaks:
+
+
+I used the ChipSeeker package on R to look at distribution of peaks across different genomic regions:
+
 
