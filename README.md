@@ -168,11 +168,13 @@ module load python/3.7.4
 
 /home/mrabbani/.local/bin/computeMatrix reference-point --referencePoint TSS -b 10000 -a 10000 -R \
 bed_ucsc/mm10_ucsc_coding_exons.bed -S Sample_3067-MR-1/fseq_output/scaled_all_chromosomes_MR1_001.bw \
---skipZeros -o deeptools_output/MR1_scaled_001_codingExon_TSS.gz --outFileSortedRegions regions_MR1_scaled_001_codingExon_TSS.bed -p 8
+--skipZeros -o deeptools_output/MR1_scaled_001_codingExon_TSS.gz \
+--outFileSortedRegions regions_MR1_scaled_001_codingExon_TSS.bed -p 8
 
 /home/mrabbani/.local/bin/computeMatrix reference-point --referencePoint TSS -b 10000 -a 10000 -R \
 bed_ucsc/mm10_ucsc_coding_exons.bed -S Sample_3067-MR-3/fseq_output/scaled_all_chromosomes_MR3_001.bw \
---skipZeros -o deeptools_output/MR3_scaled_001_codingExon_TSS.gz --outFileSortedRegions regions_MR3_scaled_001_codingExon_TSS.bed -p 8
+--skipZeros -o deeptools_output/MR3_scaled_001_codingExon_TSS.gz \
+--outFileSortedRegions regions_MR3_scaled_001_codingExon_TSS.bed -p 8
 
 /home/mrabbani/.local/bin/plotHeatmap -m MR1_scaled_001_codingExon_TSS.gz -out MR1_scaled_001_codingExon_TSS_Heatmap.png 
 
