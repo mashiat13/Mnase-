@@ -131,8 +131,7 @@ module load python/3.7.4
 ```
 
 I also looked at the heatmap of the reads around the Transcription start sites, using deeptools. For this I used the coding exon track from UCSC.
-MR1_scaled_001_codingExon_TSS_Heatmap.png![image](https://user-images.githubusercontent.com/54853508/114583148-4b068500-9c4f-11eb-8561-1b98d1d17312.png)
-MR3_scaled_001_codingExon_TSS_Heatmap.png![image](https://user-images.githubusercontent.com/54853508/114583163-4fcb3900-9c4f-11eb-86e6-baf65839502b.png)
+MR1_scaled_001_codingExon_TSS_Heatmap.png![image](https://user-images.githubusercontent.com/54853508/114583148-4b068500-9c4f-11eb-8561-1b98d1d17312.png)MR3_scaled_001_codingExon_TSS_Heatmap.png![image](https://user-images.githubusercontent.com/54853508/114583163-4fcb3900-9c4f-11eb-86e6-baf65839502b.png)
 
 Script used to generate plots are as follows:
 
