@@ -142,11 +142,16 @@ module load python/3.7.4
 
 #generate big wig files using deeptools
 
-/home/mrabbani/.local/bin/multiBigwigSummary bins -b Sample_3067-MR-1/fseq_output/scaled_all_chromosomes_MR1_001.bw Sample_3067-MR-3/fseq_output/scaled_all_chromosomes_MR3_001.bw -o mnase_wt_mt_multibw_001.npz
+/home/mrabbani/.local/bin/multiBigwigSummary bins \
+-b Sample_3067-MR-1/fseq_output/scaled_all_chromosomes_MR1_001.bw \
+Sample_3067-MR-3/fseq_output/scaled_all_chromosomes_MR3_001.bw \
+-o mnase_wt_mt_multibw_001.npz
 
-/home/mrabbani/.local/bin/plotCorrelation --corData mnase_wt_mt_multibw_001.npz --corMethod pearson --whatToPlot heatmap -o mnase_wt_mt_multibw_corr_pearson_heatmap_001.pdf
+/home/mrabbani/.local/bin/plotCorrelation --corData mnase_wt_mt_multibw_001.npz \
+--corMethod pearson --whatToPlot heatmap -o mnase_wt_mt_multibw_corr_pearson_heatmap_001.pdf
 
-/home/mrabbani/.local/bin/plotPCA -in mnase_wt_mt_multibw_001.npz -o mnase_wt_mt_multibw_PCA_readCounts_001.png -T "PCA of Mnase of WT vs Mutant"
+/home/mrabbani/.local/bin/plotPCA -in mnase_wt_mt_multibw_001.npz \
+-o mnase_wt_mt_multibw_PCA_readCounts_001.png -T "PCA of Mnase of WT vs Mutant"
 
 ```
 
@@ -161,9 +166,13 @@ Script used to generate plots are as follows:
 module load Bioinformatics
 module load python/3.7.4
 
-/home/mrabbani/.local/bin/computeMatrix reference-point --referencePoint TSS -b 10000 -a 10000 -R bed_ucsc/mm10_ucsc_coding_exons.bed -S Sample_3067-MR-1/fseq_output/scaled_all_chromosomes_MR1_001.bw --skipZeros -o deeptools_output/MR1_scaled_001_codingExon_TSS.gz --outFileSortedRegions regions_MR1_scaled_001_codingExon_TSS.bed -p 8
+/home/mrabbani/.local/bin/computeMatrix reference-point --referencePoint TSS -b 10000 -a 10000 -R \
+bed_ucsc/mm10_ucsc_coding_exons.bed -S Sample_3067-MR-1/fseq_output/scaled_all_chromosomes_MR1_001.bw \
+--skipZeros -o deeptools_output/MR1_scaled_001_codingExon_TSS.gz --outFileSortedRegions regions_MR1_scaled_001_codingExon_TSS.bed -p 8
 
-/home/mrabbani/.local/bin/computeMatrix reference-point --referencePoint TSS -b 10000 -a 10000 -R bed_ucsc/mm10_ucsc_coding_exons.bed -S Sample_3067-MR-3/fseq_output/scaled_all_chromosomes_MR3_001.bw --skipZeros -o deeptools_output/MR3_scaled_001_codingExon_TSS.gz --outFileSortedRegions regions_MR3_scaled_001_codingExon_TSS.bed -p 8
+/home/mrabbani/.local/bin/computeMatrix reference-point --referencePoint TSS -b 10000 -a 10000 -R \
+bed_ucsc/mm10_ucsc_coding_exons.bed -S Sample_3067-MR-3/fseq_output/scaled_all_chromosomes_MR3_001.bw \
+--skipZeros -o deeptools_output/MR3_scaled_001_codingExon_TSS.gz --outFileSortedRegions regions_MR3_scaled_001_codingExon_TSS.bed -p 8
 
 /home/mrabbani/.local/bin/plotHeatmap -m MR1_scaled_001_codingExon_TSS.gz -out MR1_scaled_001_codingExon_TSS_Heatmap.png 
 
