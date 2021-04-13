@@ -28,7 +28,8 @@ module load Bioinformatics
 module load bowtie2/2.4.1
 
 #this is working for us 
-bowtie2 -x ecoli/e_coli -1 Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_R1_001.fastq.gz \
+bowtie2 -x ecoli/e_coli \
+-1 Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_R1_001.fastq.gz \
 -2 Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_R2_001.fastq.gz \
 -S Sample_3067-MR-1/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106_ECOLI.sam
 ```
@@ -43,13 +44,16 @@ module load Bioinformatics
 module load python3.6-anaconda
 module load bedtools2/2.29.2
 
-bedtools bamtobed -i Sample_3067-MR-1/bamfiles/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sorted_name.bam \
+bedtools bamtobed \
+-i Sample_3067-MR-1/bamfiles/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sorted_name.bam \
 -bedpe > Sample_3067-MR-1/bamfiles/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sorted_name.bed 
 
-bedtools bamtobed -i Sample_3067-MR-3/bamfiles/cutadapt_3067-MR-3_GTCCGCAT-AGATCTCG_S107.sorted_name.bam \
+bedtools bamtobed \
+-i Sample_3067-MR-3/bamfiles/cutadapt_3067-MR-3_GTCCGCAT-AGATCTCG_S107.sorted_name.bam \
 -bedpe > Sample_3067-MR-3/bamfiles/cutadapt_3067-MR-3_GTCCGCAT-AGATCTCG_S107.sorted_name.bed
 
-bedtools bamtobed -i chip_input/cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16.sorted_name.bam \
+bedtools bamtobed \
+-i chip_input/cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16.sorted_name.bam \
 -bedpe > chip_input/cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16.sorted_name.bed
 
 ```
@@ -66,7 +70,8 @@ module load bedtools2/2.29.2
 source activate fseq2_env
 conda activate fseq2_env
 
-fseq2 callpeak Sample_3067-MR-1/bamfiles/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sorted_name.bed \
+fseq2 callpeak \
+Sample_3067-MR-1/bamfiles/cutadapt_3067-MR-1_CAGATCAT-AGATCTCG_S106.sorted_name.bed \
 -control_file chip_input/cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16.sorted_name.bed -l 1000 \
 -t 4.0 -p_thr 0.05 -sig_format np_array -chrom_size_file mm10.chrom.sizes \
 -v -cpus 4 -o Sample_3067-MR-1/fseq_output -name Sample_3067-MR-1_fseq -pe
@@ -96,7 +101,8 @@ def read_chrom_size_file(file_name):
 
     return chr_size_dic
     
-chrom_ls = ['chr1', 'chr2', 'chr3', 'chr4', 'chr5', 'chr6', 'chr7', 'chr8', 'chr9', 'chr10','chr11', 'chr12','chr13', 'chr14', 'chr15', 'chr16', 'chr17', 'chr18', 'chr19','chrX', 'chrY'] # chrs to deal with
+chrom_ls = ['chr1', 'chr2', 'chr3', 'chr4', 'chr5', 'chr6', 
+'chr7', 'chr8', 'chr9', 'chr10','chr11', 'chr12','chr13', 'chr14', 'chr15', 'chr16', 'chr17', 'chr18', 'chr19','chrX', 'chrY'] # chrs to deal with
 #chrom_ls = ['chr1', 'chr2'] # chrs to deal with
 ecoli_human_ratio = 0.001 # change the scale #0.001 number of mapped reads to ecoli/number of mapped reads to mm10
 
