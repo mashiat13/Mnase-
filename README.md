@@ -131,7 +131,7 @@ module load python/3.7.4
 ```
 
 I also looked at the heatmap of the reads around the Transcription start sites, using deeptools. For this I used the coding exon track from UCSC.
-MR1_scaled_001_codingExon_TSS_Heatmap.png![image](https://user-images.githubusercontent.com/54853508/114583148-4b068500-9c4f-11eb-8561-1b98d1d17312.png)MR3_scaled_001_codingExon_TSS_Heatmap.png![image](https://user-images.githubusercontent.com/54853508/114583163-4fcb3900-9c4f-11eb-86e6-baf65839502b.png)
+![image](https://user-images.githubusercontent.com/54853508/114587617-d8e46f00-9c53-11eb-9440-fb1dd514941e.png)
 
 Script used to generate plots are as follows:
 
@@ -153,5 +153,59 @@ In addtion to using Fseq2, I also used MACS2 to call peaks:
 
 
 I used the ChipSeeker package on R to look at distribution of peaks across different genomic regions:
+![image](https://user-images.githubusercontent.com/54853508/114587488-b7838300-9c53-11eb-9cc6-3fffdf4ac693.png)
+![image](https://user-images.githubusercontent.com/54853508/114587564-c9fdbc80-9c53-11eb-9ef8-61b9fa303b75.png)
+![image](https://user-images.githubusercontent.com/54853508/114587683-e4d03100-9c53-11eb-962c-7fbfc1685bc1.png)
 
+```
+#Load in all required libraries 
+library(ggplot2)
+library(stringr)
+library(ChIPseeker)
+library(TxDb.Mmusculus.UCSC.mm10.knownGene)
+library(GenomicRanges)
+library(dplyr)
+library(clusterProfiler)
+library(org.Mm.eg.db)
+library("EnsDb.Mmusculus.v79")
+txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
+#Annotation of mnase seq peak files 
+
+setwd("/scratch/junzli_root/junzli/mrabbani/3067-MR/fastqs_3067-MR/")
+
+wt_peak <- read.table("Sample_3067-MR-1/fseq_output/Sample_3067-MR-1_fseq_bw_peaks.narrowPeak")
+mt_peak <- read.table("Sample_3067-MR-3/fseq_output/Sample_3067-MR-3_fseq2_bw_peaks.narrowPeak")
+wt_peak_macs <- read.table("mr1MACS2_output/mr1_macs_peaks.narrowPeak")
+mt_peak_macs <- read.table("mr3MACS2_output/mr3_macs_peaks.narrowPeak")
+
+#file <- mt_peak
+#colnames(file) <- c("chrom", "chromStart", "chromEnd", "name", "score", "strand", "signalValue", "pValue", "qValue", "peak")
+
+annotate_peak_function <- function(filename, region_start, region_end){
+  colnames(filename) <- c("chrom", "chromStart", "chromEnd", "name", "score", "strand", "signalValue", "pValue", "qValue", "peak")
+  
+  #load in known gene table 
+  txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
+  
+  #convert file to granges 
+  file_granges <- GRanges(filename)
+  peakAnnoList <- annotatePeak(peak = file_granges, tssRegion = c(region_start, region_end), TxDb = txdb)
+  return(peakAnnoList)
+}
+
+wt_anno <- annotate_peak_function(wt_peak, -1000, 1000)
+mt_anno <- annotate_peak_function(mt_peak, -1000, 1000)
+wt_anno_macs <- annotate_peak_function(wt_peak_macs, -1000, 1000)
+mt_anno_macs <- annotate_peak_function(mt_peak_macs, -1000, 1000)
+
+plotAnnoBar(wt_anno, title = "WT-FSEQ2, scale=0.001")
+plotAnnoBar(mt_anno, title = "MT-FSEQ2, scale = 0.001")
+plotAnnoBar(wt_anno_macs, title = "WT-MACS")
+plotAnnoBar(mt_anno_macs, title = "MT-MACS")
+
+plotDistToTSS(wt_anno, title = "WT-FSEQ2, scale=0.001")
+plotDistToTSS(mt_anno, title = "MT-FSEQ2, scale = 0.001")
+plotDistToTSS(wt_anno_macs, title = "WT-MACS")
+plotDistToTSS(mt_anno_macs, title = "MT-MACS")
+```
 
