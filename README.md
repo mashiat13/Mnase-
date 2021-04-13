@@ -108,3 +108,9 @@ with h5py.File('Sample_3067-MR-1_fseq_sig.h5', mode='r') as sig_file: #change na
         for chrom in chrom_ls:
             output_bw.addEntries(chrom, int(sig_file.attrs[chrom]), values=sig_dict[chrom], span=1, step=1)
 ```
+
+I looked at the generation of the raw and the scaled bigwig files using deeptools:
+
+![image](https://user-images.githubusercontent.com/54853508/114576750-6c647280-9c49-11eb-86d7-c102a17c4571.png)
+
+
