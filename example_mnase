@@ -1,2 +1,45 @@
-
 Processing published MNase data from Antoine Peters lab.
+
+Paper for reference:
+Genome-wide chromatin analysis in mature mouse and human spermatozoa 
+
+1. Download fastq files from the sra in amazon cloud storage. 
+GSM1046828	Sperm Nucleosome replicate2	sperm_Mnase_2.fastq.gz	nucl_1
+GSM1076253	Sperm Nucleosome replicate3	sperm_Mnase_3.fastq.gz	nucl_2
+GSM1046836	Sperm sonicated genomic DNA	sperm_sonic.fastq.gz	control
+
+
+/home/mrabbani/software/sratoolkit.2.10.5-centos_linux64/bin/prefetch SRR625501 SRR656613 SRR625509
+
+/home/mrabbani/software/sratoolkit.2.10.5-centos_linux64/bin/fastq-dump filename.sra > filename.fastq
+
+
+#alignment 
+
+curl ftp://ftp.ccb.jhu.edu/pub/data/bowtie2_indexes/mm10.zip -o genome/mm10.zip
+unzip genome/mm10.zip -d genome/
+
+#!/bin/bash
+
+#SBATCH --job-name=bowtie_exampleMnase
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem-per-cpu=32GB 
+#SBATCH --time=24:00:00
+#SBATCH --account=junzli1
+#SBATCH --partition=standard
+
+# The application(s) to execute along with its input arguments and options
+module load Bioinformatics
+module load bowtie2/2.4.1
+
+#command used by me for mnase alignment 
+#bowtie2 -x mm10/mm10 -1 chip_input/cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16_R1_001.fastq.gz -2 chip_input/
+#cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16_R2_001.fastq.gz -S chip_input/cutadapt_1619-SS-12_GATTCTGC-CTCTCGTC_S16.sam #-p 8 
+
+#command used by the paper methods 
+bowtie2 -x genome/mm10 --phred33-quals -U seqdata/SRR625501.fastq -p 20 > alignments/SRR625501-mnase2.sam
+bowtie2 -x genome/mm10 --phred33-quals -U seqdata/SRR625509.fastq -p 20 > alignments/SRR625509-control.sam
+bowtie2 -x genome/mm10 --phred33-quals -U seqdata/SRR656613.fastq -p 20 > alignments/SRR656613-mnase3.sam
