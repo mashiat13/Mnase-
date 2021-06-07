@@ -1,0 +1,23 @@
+6-7-21
+
+Title - Mnase analysis 
+Core ID: 3462-MR
+
+Sequencing specifics:
+- NovaSeq shared flowcell - generated from 151 x 151 NovaSeq
+- expected reads per sample on average - 20 million 
+- Sample details:
+
+WT input 1	4.80	18	I2	CGATGT
+WT input 2	4.42	18	I4	TGACCA
+K49 input 1	5.38	18	I5	ACAGTG
+K49 input 2	6.32	18	I6	GCCAAT
+WT mono 1	3.92	18	I7	CAGATC
+WT mono 2	6.66	18	I12	CTTGTA
+WT mono 3	3.56	18	I13	AGTCAA
+K49 mono 1	6.28	18	I14	AGTTCC
+K49 mono 2	3.34	18	I15	ATGTCA
+K49 mono 3	4.80	18	I18	GTCCGC
+
+Computational analysis:
+1. FastQC - reports look good. No major overrepresented adaptor sequences. 
