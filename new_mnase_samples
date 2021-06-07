@@ -407,7 +407,7 @@ Samtools alignment statistics by sample:
 
 #!/bin/bash
 
-#SBATCH --job-name=bam_sort_index_mn_c
+#SBATCH --job-name=bam_sort_index_mr10
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
@@ -422,8 +422,8 @@ Samtools alignment statistics by sample:
 module load Bioinformatics
 module load samtools/1.9
 
-samtools view -bSu alignments/SRR625509-control.sam | samtools sort -@ 20 -o alignments/SRR625509-control
-samtools index alignments/SRR625509-control.bam
+samtools view -bSu 3462-MR-10_GTCCGCAC-AGATCTCG_S182.sam | samtools sort -@ 20 -o 3462-MR10-K49-M3.bam
+samtools index 3462-MR10-K49-M3.bam
 
 #-b-Output in the BAM format.
 #-S-Ignored for compatibility with previous samtools versions. Previously this option was required if input was in SAM format, but now the correct format is automatically detected by examining the first few characters of input.
