@@ -297,10 +297,79 @@ Samtools alignment statistics by sample:
 2.53% overall alignment rate
 
 8.MR8-K49 mono 1
+-mm10(job ID-21204613)
+27877642 reads; of these:
+  27877642 (100.00%) were paired; of these:
+    5334292 (19.13%) aligned concordantly 0 times
+    16509058 (59.22%) aligned concordantly exactly 1 time
+    6034292 (21.65%) aligned concordantly >1 times
+    ----
+    5334292 pairs aligned concordantly 0 times; of these:
+      2671331 (50.08%) aligned discordantly 1 time
+    ----
+    2662961 pairs aligned 0 times concordantly or discordantly; of these:
+      5325922 mates make up the pairs; of these:
+        3439627 (64.58%) aligned 0 times
+        615034 (11.55%) aligned exactly 1 time
+        1271261 (23.87%) aligned >1 times
+93.83% overall alignment rate
+
+-ecoli(job ID-21205457)
+27877642 reads; of these:
+  27877642 (100.00%) were paired; of these:
+    27450745 (98.47%) aligned concordantly 0 times
+    423692 (1.52%) aligned concordantly exactly 1 time
+    3205 (0.01%) aligned concordantly >1 times
+    ----
+    27450745 pairs aligned concordantly 0 times; of these:
+      30830 (0.11%) aligned discordantly 1 time
+    ----
+    27419915 pairs aligned 0 times concordantly or discordantly; of these:
+      54839830 mates make up the pairs; of these:
+        54826953 (99.98%) aligned 0 times
+        12195 (0.02%) aligned exactly 1 time
+        682 (0.00%) aligned >1 times
+1.67% overall alignment rate
+
 9.MR9-K49 mono 2
+-mm10(job ID-21204614)
+
+-ecoli(job ID-21206119)
+37432732 reads; of these:
+  37432732 (100.00%) were paired; of these:
+    37007312 (98.86%) aligned concordantly 0 times
+    421983 (1.13%) aligned concordantly exactly 1 time
+    3437 (0.01%) aligned concordantly >1 times
+    ----
+    37007312 pairs aligned concordantly 0 times; of these:
+      22638 (0.06%) aligned discordantly 1 time
+    ----
+    36984674 pairs aligned 0 times concordantly or discordantly; of these:
+      73969348 mates make up the pairs; of these:
+        73956330 (99.98%) aligned 0 times
+        12425 (0.02%) aligned exactly 1 time
+        593 (0.00%) aligned >1 times
+1.21% overall alignment rate
+
 10.MR10-K49 mono 3
+-mm10(job ID-21204616)
 
-
+-ecoli(job ID-21206120)
+51898554 reads; of these:
+  51898554 (100.00%) were paired; of these:
+    50522944 (97.35%) aligned concordantly 0 times
+    1364849 (2.63%) aligned concordantly exactly 1 time
+    10761 (0.02%) aligned concordantly >1 times
+    ----
+    50522944 pairs aligned concordantly 0 times; of these:
+      100577 (0.20%) aligned discordantly 1 time
+    ----
+    50422367 pairs aligned 0 times concordantly or discordantly; of these:
+      100844734 mates make up the pairs; of these:
+        100796397 (99.95%) aligned 0 times
+        45817 (0.05%) aligned exactly 1 time
+        2520 (0.00%) aligned >1 times
+2.89% overall alignment rate
 
 
 
