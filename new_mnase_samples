@@ -119,14 +119,186 @@ Samtools alignment statistics by sample:
         868 (0.00%) aligned >1 times
 2.09% overall alignment rate
 
-3.
-4.
-5.
-6.
-7.
-8.
-9.
-10. 
+3.MR3-K49 input 1
+-mm10 (job ID-21204473)
+33849012 reads; of these:
+  33849012 (100.00%) were paired; of these:
+    2829965 (8.36%) aligned concordantly 0 times
+    23917065 (70.66%) aligned concordantly exactly 1 time
+    7101982 (20.98%) aligned concordantly >1 times
+    ----
+    2829965 pairs aligned concordantly 0 times; of these:
+      780328 (27.57%) aligned discordantly 1 time
+    ----
+    2049637 pairs aligned 0 times concordantly or discordantly; of these:
+      4099274 mates make up the pairs; of these:
+        3046199 (74.31%) aligned 0 times
+        521220 (12.71%) aligned exactly 1 time
+        531855 (12.97%) aligned >1 times
+95.50% overall alignment rate
+
+-ecoli(job iD-21204633)
+33849012 reads; of these:
+  33849012 (100.00%) were paired; of these:
+    33246340 (98.22%) aligned concordantly 0 times
+    597522 (1.77%) aligned concordantly exactly 1 time
+    5150 (0.02%) aligned concordantly >1 times
+    ----
+    33246340 pairs aligned concordantly 0 times; of these:
+      15209 (0.05%) aligned discordantly 1 time
+    ----
+    33231131 pairs aligned 0 times concordantly or discordantly; of these:
+      66462262 mates make up the pairs; of these:
+        66442534 (99.97%) aligned 0 times
+        19093 (0.03%) aligned exactly 1 time
+        635 (0.00%) aligned >1 times
+1.85% overall alignment rate
+
+4.MR4-K49 input 2
+-mm10(job ID-21204490)
+27477013 reads; of these:
+  27477013 (100.00%) were paired; of these:
+    2450981 (8.92%) aligned concordantly 0 times
+    19473686 (70.87%) aligned concordantly exactly 1 time
+    5552346 (20.21%) aligned concordantly >1 times
+    ----
+    2450981 pairs aligned concordantly 0 times; of these:
+      752722 (30.71%) aligned discordantly 1 time
+    ----
+    1698259 pairs aligned 0 times concordantly or discordantly; of these:
+      3396518 mates make up the pairs; of these:
+        2413121 (71.05%) aligned 0 times
+        472484 (13.91%) aligned exactly 1 time
+        510913 (15.04%) aligned >1 times
+95.61% overall alignment rate
+
+-ecoli(job ID-21205426)
+
+27477013 reads; of these:
+  27477013 (100.00%) were paired; of these:
+    27115575 (98.68%) aligned concordantly 0 times
+    358429 (1.30%) aligned concordantly exactly 1 time
+    3009 (0.01%) aligned concordantly >1 times
+    ----
+    27115575 pairs aligned concordantly 0 times; of these:
+      13590 (0.05%) aligned discordantly 1 time
+    ----
+    27101985 pairs aligned 0 times concordantly or discordantly; of these:
+      54203970 mates make up the pairs; of these:
+        54192350 (99.98%) aligned 0 times
+        11266 (0.02%) aligned exactly 1 time
+        354 (0.00%) aligned >1 times
+1.39% overall alignment rate
+
+5.MR5-WT mono 1 
+-mm10(job ID-21204534)
+32357925 reads; of these:
+  32357925 (100.00%) were paired; of these:
+    4932855 (15.24%) aligned concordantly 0 times
+    19870392 (61.41%) aligned concordantly exactly 1 time
+    7554678 (23.35%) aligned concordantly >1 times
+    ----
+    4932855 pairs aligned concordantly 0 times; of these:
+      1891577 (38.35%) aligned discordantly 1 time
+    ----
+    3041278 pairs aligned 0 times concordantly or discordantly; of these:
+      6082556 mates make up the pairs; of these:
+        4094231 (67.31%) aligned 0 times
+        876673 (14.41%) aligned exactly 1 time
+        1111652 (18.28%) aligned >1 times
+93.67% overall alignment rate
+
+-ecoli(job ID-21205428)
+32357925 reads; of these:
+  32357925 (100.00%) were paired; of these:
+    31866545 (98.48%) aligned concordantly 0 times
+    487364 (1.51%) aligned concordantly exactly 1 time
+    4016 (0.01%) aligned concordantly >1 times
+    ----
+    31866545 pairs aligned concordantly 0 times; of these:
+      20750 (0.07%) aligned discordantly 1 time
+    ----
+    31845795 pairs aligned 0 times concordantly or discordantly; of these:
+      63691590 mates make up the pairs; of these:
+        63675014 (99.97%) aligned 0 times
+        15913 (0.02%) aligned exactly 1 time
+        663 (0.00%) aligned >1 times
+1.61% overall alignment rate
+
+6.MR6-WT mono 2
+-mm10(job ID-21204590)
+28360505 reads; of these:
+  28360505 (100.00%) were paired; of these:
+    5818765 (20.52%) aligned concordantly 0 times
+    15803260 (55.72%) aligned concordantly exactly 1 time
+    6738480 (23.76%) aligned concordantly >1 times
+    ----
+    5818765 pairs aligned concordantly 0 times; of these:
+      2869384 (49.31%) aligned discordantly 1 time
+    ----
+    2949381 pairs aligned 0 times concordantly or discordantly; of these:
+      5898762 mates make up the pairs; of these:
+        3957461 (67.09%) aligned 0 times
+        541049 (9.17%) aligned exactly 1 time
+        1400252 (23.74%) aligned >1 times
+93.02% overall alignment rate
+
+-ecoli(job ID-21205430)
+28360505 reads; of these:
+  28360505 (100.00%) were paired; of these:
+    28033921 (98.85%) aligned concordantly 0 times
+    323675 (1.14%) aligned concordantly exactly 1 time
+    2909 (0.01%) aligned concordantly >1 times
+    ----
+    28033921 pairs aligned concordantly 0 times; of these:
+      25090 (0.09%) aligned discordantly 1 time
+    ----
+    28008831 pairs aligned 0 times concordantly or discordantly; of these:
+      56017662 mates make up the pairs; of these:
+        56006086 (99.98%) aligned 0 times
+        10772 (0.02%) aligned exactly 1 time
+        804 (0.00%) aligned >1 times
+1.26% overall alignment rate
+
+7.MR7-WT mono 3
+-mm10(job ID-21204611)
+23591884 reads; of these:
+  23591884 (100.00%) were paired; of these:
+    7765088 (32.91%) aligned concordantly 0 times
+    11023485 (46.73%) aligned concordantly exactly 1 time
+    4803311 (20.36%) aligned concordantly >1 times
+    ----
+    7765088 pairs aligned concordantly 0 times; of these:
+      3427628 (44.14%) aligned discordantly 1 time
+    ----
+    4337460 pairs aligned 0 times concordantly or discordantly; of these:
+      8674920 mates make up the pairs; of these:
+        6450827 (74.36%) aligned 0 times
+        673144 (7.76%) aligned exactly 1 time
+        1550949 (17.88%) aligned >1 times
+86.33% overall alignment rate
+
+-ecoli(job ID-21205435)
+
+23591884 reads; of these:
+  23591884 (100.00%) were paired; of these:
+    23034706 (97.64%) aligned concordantly 0 times
+    552664 (2.34%) aligned concordantly exactly 1 time
+    4514 (0.02%) aligned concordantly >1 times
+    ----
+    23034706 pairs aligned concordantly 0 times; of these:
+      29861 (0.13%) aligned discordantly 1 time
+    ----
+    23004845 pairs aligned 0 times concordantly or discordantly; of these:
+      46009690 mates make up the pairs; of these:
+        45992165 (99.96%) aligned 0 times
+        16696 (0.04%) aligned exactly 1 time
+        829 (0.00%) aligned >1 times
+2.53% overall alignment rate
+
+8.MR8-K49 mono 1
+9.MR9-K49 mono 2
+10.MR10-K49 mono 3
 
 
 
