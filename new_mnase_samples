@@ -368,6 +368,21 @@ Samtools alignment statistics by sample:
 
 10.MR10-K49 mono 3
 -mm10(job ID-21204616)
+51898554 reads; of these:
+  51898554 (100.00%) were paired; of these:
+    20884948 (40.24%) aligned concordantly 0 times
+    21968406 (42.33%) aligned concordantly exactly 1 time
+    9045200 (17.43%) aligned concordantly >1 times
+    ----
+    20884948 pairs aligned concordantly 0 times; of these:
+      9252784 (44.30%) aligned discordantly 1 time
+    ----
+    11632164 pairs aligned 0 times concordantly or discordantly; of these:
+      23264328 mates make up the pairs; of these:
+        17732307 (76.22%) aligned 0 times
+        1673460 (7.19%) aligned exactly 1 time
+        3858561 (16.59%) aligned >1 times
+82.92% overall alignment rate
 
 -ecoli(job ID-21206120)
 51898554 reads; of these:
