@@ -5,19 +5,164 @@ Core ID: 3462-MR
 
 Sequencing specifics:
 - NovaSeq shared flowcell - generated from 151 x 151 NovaSeq
+This pool was subjected to 151bp paired-end sequencing according to the manufacturer’s protocol (Illumina NovaSeq). Bcl2fastq2 Conversion Software (Illumina) was used to generate de-multiplexed Fastq files.
 - expected reads per sample on average - 20 million 
 - Sample details:
 
-WT input 1	4.80	18	I2	CGATGT
-WT input 2	4.42	18	I4	TGACCA
-K49 input 1	5.38	18	I5	ACAGTG
-K49 input 2	6.32	18	I6	GCCAAT
-WT mono 1	3.92	18	I7	CAGATC
-WT mono 2	6.66	18	I12	CTTGTA
-WT mono 3	3.56	18	I13	AGTCAA
-K49 mono 1	6.28	18	I14	AGTTCC
-K49 mono 2	3.34	18	I15	ATGTCA
-K49 mono 3	4.80	18	I18	GTCCGC
+"Project","Sample_ID","Description","Barcode_sequence","PF_Clusters","Percent_of_thelane","Percent_Perfectbarcode","Percent_One_mismatchbarcode","Yield_Mbases","Percent_PFClusters","Percent_GTorEQ2_Q30bases","Mean_QualityScore"
+"3462-MR","Sample_3462-MR-1","WT input 1","CGATGTAT+AGATCTCG",37680187,0.2825,100,NA,11380,100,93.05,35.78
+"3462-MR","Sample_3462-MR-2","WT input 2","TGACCAAT+AGATCTCG",33359247,0.25,100,NA,10074,100,93.535,35.875
+"3462-MR","Sample_3462-MR-3","K49 input 1","ACAGTGAT+AGATCTCG",33849012,0.255,100,NA,10223,100,93.56,35.8775
+"3462-MR","Sample_3462-MR-4","K49 input 2","GCCAATAT+AGATCTCG",27477013,0.2075,100,NA,8298,100,93.2625,35.8225
+"3462-MR","Sample_3462-MR-5","WT mono 1","CAGATCAT+AGATCTCG",32357925,0.2425,100,NA,9772,100,93.8075,35.9075
+"3462-MR","Sample_3462-MR-6","WT mono 2","CTTGTAAT+AGATCTCG",28360505,0.2125,100,NA,8565,100,94.2825,36.02
+"3462-MR","Sample_3462-MR-7","WT mono 3","AGTCAACA+AGATCTCG",23591884,0.1775,100,NA,7124,100,94.2525,35.995
+"3462-MR","Sample_3462-MR-8","K49 mono 1","AGTTCCGT+AGATCTCG",27877642,0.21,100,NA,8419,100,94.1575,35.98
+"3462-MR","Sample_3462-MR-9","K49 mono 2","ATGTCAGA+AGATCTCG",37432732,0.28,100,NA,11305,100,94.0025,35.9525
+"3462-MR","Sample_3462-MR-10","K49 mono 3","GTCCGCAC+AGATCTCG",51898554,0.3875,100,NA,15673,100,94.4575,36.0325
 
 Computational analysis:
 1. FastQC - reports look good. No major overrepresented adaptor sequences. 
+
+2. Mapping using bowtie
+-mapping to the mouse genome 
+#!/bin/bash
+
+#SBATCH --job-name=bowtie_chipinput
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem-per-cpu=32GB 
+#SBATCH --time=24:00:00
+#SBATCH --account=junzli1
+#SBATCH --partition=standard
+
+# The application(s) to execute along with its input arguments and options
+module load Bioinformatics
+module load bowtie2/2.4.1
+
+#this is working for us 
+bowtie2 -x mm10/mm10 --phred33-quals -1 Sample_3462-MR-1/3462-MR-1_CGATGTAT-AGATCTCG_S173_R1_001.fastq.gz -2 Sample_3462-MR-1/3462-MR-1_CGATGTAT-AGATCTCG_S173_R2_001.fastq.gz -S Sample_3462-MR-1/3462-MR-1_CGATGTAT-AGATCTCG_S173.sam -p 20 
+
+- mapping to ecoli genome
+ecoli/e_coli
+
+Samtools alignment statistics by sample:
+1. MR1-WT input 1 
+-mm10(job ID - 21204229)
+37680187 reads; of these:
+  37680187 (100.00%) were paired; of these:
+    5379684 (14.28%) aligned concordantly 0 times
+    26260784 (69.69%) aligned concordantly exactly 1 time
+    6039719 (16.03%) aligned concordantly >1 times
+    ----
+    5379684 pairs aligned concordantly 0 times; of these:
+      1692676 (31.46%) aligned discordantly 1 time
+    ----
+    3687008 pairs aligned 0 times concordantly or discordantly; of these:
+      7374016 mates make up the pairs; of these:
+        5680713 (77.04%) aligned 0 times
+        797442 (10.81%) aligned exactly 1 time
+        895861 (12.15%) aligned >1 times
+92.46% overall alignment rate
+
+-ecoli (job ID-21204620)
+37680187 reads; of these:
+  37680187 (100.00%) were paired; of these:
+    37201899 (98.73%) aligned concordantly 0 times
+    474408 (1.26%) aligned concordantly exactly 1 time
+    3880 (0.01%) aligned concordantly >1 times
+    ----
+    37201899 pairs aligned concordantly 0 times; of these:
+      23833 (0.06%) aligned discordantly 1 time
+    ----
+    37178066 pairs aligned 0 times concordantly or discordantly; of these:
+      74356132 mates make up the pairs; of these:
+        74337945 (99.98%) aligned 0 times
+        17429 (0.02%) aligned exactly 1 time
+        758 (0.00%) aligned >1 times
+1.36% overall alignment rate
+
+2.MR2-WT input 2
+-mm10(job ID-21204459)
+33359247 reads; of these:
+  33359247 (100.00%) were paired; of these:
+    3670072 (11.00%) aligned concordantly 0 times
+    23711924 (71.08%) aligned concordantly exactly 1 time
+    5977251 (17.92%) aligned concordantly >1 times
+    ----
+    3670072 pairs aligned concordantly 0 times; of these:
+      1309226 (35.67%) aligned discordantly 1 time
+    ----
+    2360846 pairs aligned 0 times concordantly or discordantly; of these:
+      4721692 mates make up the pairs; of these:
+        3545108 (75.08%) aligned 0 times
+        533138 (11.29%) aligned exactly 1 time
+        643446 (13.63%) aligned >1 times
+94.69% overall alignment rate
+
+-ecoli(job ID - 21204624)
+33359247 reads; of these:
+  33359247 (100.00%) were paired; of these:
+    32697788 (98.02%) aligned concordantly 0 times
+    655983 (1.97%) aligned concordantly exactly 1 time
+    5476 (0.02%) aligned concordantly >1 times
+    ----
+    32697788 pairs aligned concordantly 0 times; of these:
+      23093 (0.07%) aligned discordantly 1 time
+    ----
+    32674695 pairs aligned 0 times concordantly or discordantly; of these:
+      65349390 mates make up the pairs; of these:
+        65325569 (99.96%) aligned 0 times
+        22953 (0.04%) aligned exactly 1 time
+        868 (0.00%) aligned >1 times
+2.09% overall alignment rate
+
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10. 
+
+
+
+
+
+3. Convert to bam, sort and index 
+
+#!/bin/bash
+
+#SBATCH --job-name=bam_sort_index_mn_c
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem-per-cpu=32GB 
+#SBATCH --time=40:00:00
+#SBATCH --account=junzli1
+#SBATCH --partition=standard
+
+
+# The application(s) to execute along with its input arguments and options
+module load Bioinformatics
+module load samtools/1.9
+
+samtools view -bSu alignments/SRR625509-control.sam | samtools sort -@ 20 -o alignments/SRR625509-control
+samtools index alignments/SRR625509-control.bam
+
+#-b-Output in the BAM format.
+#-S-Ignored for compatibility with previous samtools versions. Previously this option was required if input was in SAM format, but now the correct format is automatically detected by examining the first few characters of input.
+#-u-Output uncompressed BAM. This option saves time spent on compression/decompression and is thus preferred when the output is piped to another samtools command.
+#@ -Set number of sorting and compression threads. By default, operation is single-threaded.
+
+
+
+4. Convert bam to bed 
+
+5. Run Fseq2 
+
+
